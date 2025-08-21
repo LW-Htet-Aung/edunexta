@@ -1,6 +1,18 @@
-interface LoginPageProps {}
+import { auth } from "@/lib/auth";
+import LoginForm from "./_components/login-form";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-const LoginPage = ({}: LoginPageProps) => {
-  return <div>Login</div>;
+const LoginPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  // redirect user to home page if authenticated
+  if (session) {
+    return redirect("/");
+  }
+
+  return <LoginForm />;
 };
 export default LoginPage;
