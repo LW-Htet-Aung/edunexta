@@ -4,7 +4,18 @@ import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../public/logo.svg";
-const AuthLayout = ({ children }: ChildrenProps) => {
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+const AuthLayout = async ({ children }: ChildrenProps) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  // redirect user to home page if authenticated
+  if (session) {
+    return redirect("/");
+  }
   return (
     <div className="relative flex flex-col  min-h-svh justify-center items-center ">
       <Link
