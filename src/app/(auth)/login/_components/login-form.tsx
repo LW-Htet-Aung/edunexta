@@ -12,13 +12,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { Loader } from "lucide-react";
-import { useTransition } from "react";
+import { Loader, Send } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 const LoginForm = () => {
   const [githubPending, startGithubTransition] = useTransition();
-
+  const [emailPending, startEmailTransition] = useTransition();
+  const [email, setEmail] = useState("");
+  const router = useRouter();
   const signInWithGithub = async () => {
     startGithubTransition(async () => {
       await authClient.signIn.social({
@@ -31,6 +34,25 @@ const LoginForm = () => {
           onError: (error) => {
             console.log(error);
             toast.error(error?.error.message);
+          },
+        },
+      });
+    });
+  };
+
+  const signInWithEmail = () => {
+    startEmailTransition(async () => {
+      await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type: "sign-in",
+
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Email sent.");
+            router.push(`/verify-request?email=${email}`);
+          },
+          onError: () => {
+            toast.error("Error sending email.");
           },
         },
       });
@@ -50,18 +72,10 @@ const LoginForm = () => {
           className="w-full cursor-pointer"
           variant="outline"
           onClick={signInWithGithub}
+          isLoading={githubPending}
         >
-          {githubPending ? (
-            <>
-              <Loader className="animate-spin size-4" />
-              <span>Loading...</span>
-            </>
-          ) : (
-            <>
-              <GithubIcon className="size-4 " />
-              Sign in with Github
-            </>
-          )}
+          <GithubIcon className="size-4 " />
+          Sign in with Github
         </Button>
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border ">
           <span className="relative z-100 bg-card px-2 text-muted-foreground">
@@ -71,9 +85,28 @@ const LoginForm = () => {
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input type="email" placeholder="test@example.com" id="email" />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              type="email"
+              placeholder="test@example.com"
+              id="email"
+            />
           </div>
-          <Button>Continue with Email</Button>
+          <Button onClick={signInWithEmail} disabled={emailPending}>
+            {emailPending ? (
+              <>
+                <Loader className="animate-spin size-4" />
+                <span>Loading...</span>
+              </>
+            ) : (
+              <>
+                <Send className="size-4" />
+                <span> Continue with Email</span>
+              </>
+            )}
+          </Button>
         </div>
       </CardContent>
     </Card>
