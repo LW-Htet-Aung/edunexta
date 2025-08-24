@@ -8,6 +8,9 @@ import { toast } from "sonner";
 export default function Home() {
   const { data: session } = authClient.useSession();
   const router = useRouter();
+
+  const handleLogin = () => router.push("/login");
+
   const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -28,7 +31,7 @@ export default function Home() {
           <Button onClick={handleLogout}>Logout</Button>
         </div>
       ) : (
-        <Button>Login</Button>
+        <Button onClick={handleLogin}>Login</Button>
       )}
     </div>
   );
