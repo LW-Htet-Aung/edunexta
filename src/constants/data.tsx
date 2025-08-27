@@ -38,6 +38,6 @@ export const navigationItems: NavigationItemsProps[] = [
   },
   {
     name: "Dashboard",
-    href: "/dashboard",
+    href: "/admin",
   },
 ];
