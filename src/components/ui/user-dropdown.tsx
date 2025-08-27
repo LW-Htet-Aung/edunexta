@@ -19,29 +19,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import useSignOut from "@/hooks/use-signout";
 interface UserDropDownProps {
   name: string;
   email: string;
   image: string;
 }
 export function UserDropDown({ name, email, image }: UserDropDownProps) {
-  const router = useRouter();
-  const handleLogout = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/login");
-          toast.success("Sign out successfully");
-        },
-        onError: () => {
-          toast.error("Failed to sign out");
-        },
-      },
-    });
-  };
+  const handleSignOut = useSignOut();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -85,7 +71,7 @@ export function UserDropDown({ name, email, image }: UserDropDownProps) {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">
+            <Link href="/admin">
               <LayoutDashboard
                 size={16}
                 className="opacity-60"
@@ -97,7 +83,7 @@ export function UserDropDown({ name, email, image }: UserDropDownProps) {
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout} variant="destructive">
+        <DropdownMenuItem onClick={handleSignOut} variant="destructive">
           <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
           <span>Logout</span>
         </DropdownMenuItem>
