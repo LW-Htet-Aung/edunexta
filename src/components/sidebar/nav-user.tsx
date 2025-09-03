@@ -66,7 +66,9 @@ export function NavUser() {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
-                  {user.name && user.name.length > 0 ? user.name : user.email}
+                  {user.name && user.name.length > 0
+                    ? user.name
+                    : user.email.split("@")[0]}
                 </span>
                 <span className="text-muted-foreground truncate text-xs">
                   {user.email}
@@ -87,7 +89,7 @@ export function NavUser() {
                   <AvatarImage
                     src={
                       user.image ??
-                      `https://avatar.vercel.sh/rauchg/${user.email}`
+                      `https://avatar.vercel.sh/${user.email}`
                     }
                     alt={user.name}
                   />

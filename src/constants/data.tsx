@@ -1,3 +1,4 @@
+import { CourseLevel, CourseStatus } from "@/generated/prisma";
 import { FeatureProps, NavigationItemsProps } from "@/types/constant";
 
 export const features: FeatureProps[] = [
@@ -41,3 +42,29 @@ export const navigationItems: NavigationItemsProps[] = [
     href: "/admin",
   },
 ];
+
+export const courseLevels: CourseLevel[] = [
+  "Beginner",
+  "Intermediate",
+  "Advanced",
+] as const;
+
+export const courseStatus: CourseStatus[] = [
+  "Draft",
+  "Published",
+  "Archived",
+] as const;
+
+export const courseCategories = [
+  "Development",
+  "Business",
+  "Finance",
+  "IT & Software",
+  "Office Productivity",
+  "Personal Development",
+  "Design",
+  "Marketing",
+  "Health & Fitness",
+  "Music",
+  "Teaching & Academics",
+] as const;

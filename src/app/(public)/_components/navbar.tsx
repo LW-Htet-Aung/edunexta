@@ -41,9 +41,17 @@ const Navbar = () => {
             {isPending ? null : session ? (
               <>
                 <UserDropDown
-                  name={session.user.name}
+                  name={
+                    session.user.name && session.user.name.length > 0
+                      ? session.user.name
+                      : session.user.email
+                  }
                   email={session.user.email}
-                  image={session.user.image || ""}
+                  image={
+                    session.user.image ??
+                    (`https://avatar.vercel.sh/${session.user.email}` ||
+                      "")
+                  }
                 />
               </>
             ) : (
