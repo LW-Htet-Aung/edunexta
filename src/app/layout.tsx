@@ -37,14 +37,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Toaster
-            toastOptions={{
-              classNames: {
-                error: "!bg-destructive !text-white",
-              },
-            }}
-          />
-          <NextTopLoader color="#6444d5" height={3} showSpinner={false}  />
+          <Toaster richColors position="top-right" />
+          <NextTopLoader color="#6444d5" height={3} showSpinner={false} />
         </ThemeProvider>
       </body>
     </html>

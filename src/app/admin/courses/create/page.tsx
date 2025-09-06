@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { courseSchema, CourseSchemaType } from "@/lib/zodSchemas";
+import { courseSchema, CourseSchemaType } from "@/schemas/zodSchemas";
 import { ArrowLeft, PlusIcon, Sparkle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import RichTextEditor from "@/components/rich-text-editor/editor";
+import Uploader from "@/components/file-uploader/uploader";
 
 const CourseCreatePage = () => {
   const form = useForm<CourseSchemaType>({
@@ -152,7 +153,7 @@ const CourseCreatePage = () => {
                   <FormItem className="flex-1">
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
-                      <Input placeholder="thumbnail image" {...field} />
+                      <Uploader />
                     </FormControl>
                   </FormItem>
                 )}
