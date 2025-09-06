@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./menubar";
 import TextAlign from "@tiptap/extension-text-align";
 import { ControllerRenderProps } from "react-hook-form";
-import { CourseSchemaType } from "@/lib/zodSchemas";
+import { CourseSchemaType } from "@/schemas/zodSchemas";
 
 interface RichTextEditorProps {
   field: ControllerRenderProps<CourseSchemaType>;
