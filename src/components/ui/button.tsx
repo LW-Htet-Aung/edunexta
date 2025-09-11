@@ -42,6 +42,7 @@ function Button({
   size,
   asChild = false,
   isLoading = false,
+  loadingLabel = "Loading...",
   loadingClassName = "",
   ...props
 }: React.ComponentProps<"button"> &
@@ -50,6 +51,7 @@ function Button({
   } & {
     isLoading?: boolean;
     loadingClassName?: string;
+    loadingLabel?: string;
   }) {
   const Comp = asChild ? Slot : "button";
 
@@ -62,7 +64,7 @@ function Button({
       {isLoading ? (
         <>
           <Loader2 className={cn("animate-spin size-4", loadingClassName)} />
-          <span>Loading...</span>
+          <span>{loadingLabel}</span>
         </>
       ) : (
         <>{props.children}</>

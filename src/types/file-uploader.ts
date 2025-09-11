@@ -16,6 +16,8 @@ export interface RenderEmptyStateProps {
 
 export interface RenderUploadedStateProps {
   previewUrl: string;
+  isDeleting: boolean;
+  handleRemoveFile: () => void;
 }
 
 export interface RenderUploadingStateProps {

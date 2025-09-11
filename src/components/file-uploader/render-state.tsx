@@ -1,5 +1,12 @@
 import { cn } from "@/lib/utils";
-import { CloudUpload, ImageIcon, Trash, Upload, X } from "lucide-react";
+import {
+  CloudUpload,
+  ImageIcon,
+  Loader2,
+  Trash,
+  Upload,
+  X,
+} from "lucide-react";
 import { Button } from "../ui/button";
 import {
   RenderEmptyStateProps,
@@ -51,6 +58,8 @@ export const RenderErrorState = () => {
 
 export const RenderUploadedState = ({
   previewUrl,
+  isDeleting,
+  handleRemoveFile,
 }: RenderUploadedStateProps) => {
   return (
     <div className="text-center">
@@ -62,11 +71,18 @@ export const RenderUploadedState = ({
         className="object-contain p-2"
       />
       <Button
+        type="button"
+        onClick={handleRemoveFile}
+        disabled={isDeleting}
         variant="destructive"
         size="icon"
         className={cn("absolute top-4 right-4 cursor-pointer", "")}
       >
-        <X className="size-4" />
+        {isDeleting ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <Trash className="size-4" />
+        )}
       </Button>
     </div>
   );
