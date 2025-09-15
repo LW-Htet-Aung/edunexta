@@ -200,6 +200,9 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
       }
     }
   };
+  const handleRetry = () => {
+    setFileState(initialFileState); // clears error & re-enables dropzone
+  };
 
   const renderContent = () => {
     if (fileState.uploading) {
@@ -211,7 +214,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
       );
     }
     if (fileState.error) {
-      return <RenderErrorState />;
+      return <RenderErrorState onRetry={handleRetry} />;
     }
     if (fileState.objectUrl) {
       return (

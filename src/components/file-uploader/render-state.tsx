@@ -41,7 +41,7 @@ export const RenderEmptyState = ({ isDragActive }: RenderEmptyStateProps) => {
   );
 };
 
-export const RenderErrorState = () => {
+export const RenderErrorState = ({ onRetry }: { onRetry: () => void }) => {
   return (
     <div className="text-center ">
       <div className="flex items-center justify-center mx-auto size-12 rounded-full bg-destructive/30 mb-4">
@@ -49,7 +49,7 @@ export const RenderErrorState = () => {
       </div>
       <p className="text-base font-semibold">Upload Failed</p>
       <p className="text-xs text-muted-foreground mt-1">Something went wrong</p>
-      <Button type="button" className="mt-4">
+      <Button onClick={onRetry} type="button" className="mt-4">
         Try again
       </Button>
     </div>

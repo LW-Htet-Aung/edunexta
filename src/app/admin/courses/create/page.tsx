@@ -148,7 +148,11 @@ const CourseCreatePage = () => {
                   <FormItem className="flex-1">
                     <FormLabel>Small Description</FormLabel>
                     <FormControl>
-                      <RichTextEditor field={field} />
+                      <Textarea
+                        className="min-h-[120px]"
+                        placeholder="Enter small  description"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -160,11 +164,7 @@ const CourseCreatePage = () => {
                   <FormItem className="flex-1">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea
-                        className="min-h-[120px]"
-                        placeholder="Enter  description"
-                        {...field}
-                      />
+                      <RichTextEditor field={field} />
                     </FormControl>
                   </FormItem>
                 )}
