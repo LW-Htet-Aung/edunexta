@@ -83,7 +83,7 @@ model Verification {
 }
 
 model Course {
-  id               String       @default(uuid())
+  id               String       @id @default(uuid())
   slug             String       @unique
   title            String
   description      String
