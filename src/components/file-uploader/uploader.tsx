@@ -12,6 +12,7 @@ import {
 import { toast } from "sonner";
 import { UploaderStateProps } from "@/types/file-uploader";
 import { v4 as uuidv4 } from "uuid";
+import constructS3ImageUrl from "@/lib/construct-s3-image-url";
 
 const initialFileState: UploaderStateProps = {
   id: null,
@@ -29,9 +30,12 @@ interface UploaderProps {
 }
 
 const Uploader = ({ value, onChange }: UploaderProps) => {
+  const fileUrl = constructS3ImageUrl(value || "");
+
   const [fileState, setFileState] = useState<UploaderStateProps>({
     ...initialFileState,
     key: value,
+    objectUrl: fileUrl,
   });
 
   const uploadFile = useCallback(
@@ -216,6 +220,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
     if (fileState.error) {
       return <RenderErrorState onRetry={handleRetry} />;
     }
+    console.log(fileState.objectUrl, "url");
     if (fileState.objectUrl) {
       return (
         <RenderUploadedState
