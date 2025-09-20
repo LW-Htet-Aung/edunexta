@@ -50,7 +50,7 @@ const EditCoursePage = async ({ params }: { params: ParamsProps }) => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <CourseStructure />
+              <CourseStructure course={course} />
             </CardContent>
           </Card>
         </TabsContent>

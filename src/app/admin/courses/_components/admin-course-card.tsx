@@ -26,6 +26,7 @@ import React from "react";
 
 const AdminCourseCard = ({ course }: AdminCourseCardProps) => {
   const thumbnailUrl = constructS3ImageUrl(course.fileKey);
+
   return (
     <Card className="group relative py-0 gap-0 ">
       {/* Absolute dropdown */}

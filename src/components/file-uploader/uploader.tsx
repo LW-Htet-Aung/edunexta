@@ -31,6 +31,7 @@ interface UploaderProps {
 
 const Uploader = ({ value, onChange }: UploaderProps) => {
   const fileUrl = constructS3ImageUrl(value || "");
+
   const [fileState, setFileState] = useState<UploaderStateProps>({
     ...initialFileState,
     key: value,
@@ -219,6 +220,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
     if (fileState.error) {
       return <RenderErrorState onRetry={handleRetry} />;
     }
+    console.log(fileState.objectUrl, "url");
     if (fileState.objectUrl) {
       return (
         <RenderUploadedState
